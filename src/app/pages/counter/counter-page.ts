@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, signal } from "@angular/core";
 import { count } from "rxjs";
 
 @Component({
@@ -7,14 +7,14 @@ import { count } from "rxjs";
 
 export class CounterPage {
   counter: number = 10;
-
+  counterSignal = signal(10);
   Incrementar(valor: number) {
     this.counter += valor; 
-  }
-  Decrementar(valor:number) {
-    this.counter -= valor; 
+    this.counterSignal.update(current => current + valor);
   }
   Reset() {
     this.counter = 10; 
+    this.counterSignal.set(10);
+
   }
 }
